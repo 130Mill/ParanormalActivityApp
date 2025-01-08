@@ -1,0 +1,45 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.bomilligan.paranormaldetector"
+    compileSdkVersion 34
+    defaultConfig {
+        applicationId "com.bomilligan.paranormaldetector"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 3
+        versionName "1.2"
+    }
+    signingConfigs {
+        release {
+            keyAlias 'my-key-alias'
+            keyPassword '120577'
+            storeFile file('C:/Users/Steven Milligan/my-release-key.jks')
+            storePassword '120577'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true // Enable ProGuard/R8 for optimization
+            shrinkResources true // Enable resource shrinking
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel 'FULL' // Enable native debug symbols
+            }
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Ensure compatibility with JVM target 1.8
+    }
+}
+
+flutter {
+    source = "../.."
+}
