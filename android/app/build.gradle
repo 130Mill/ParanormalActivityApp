@@ -8,6 +8,7 @@ plugins {
 android {
     namespace "com.bomilligan.paranormaldetector"
     compileSdkVersion 34
+
     defaultConfig {
         applicationId "com.bomilligan.paranormaldetector"
         minSdkVersion 21
@@ -15,6 +16,7 @@ android {
         versionCode 3
         versionName "1.2"
     }
+
     signingConfigs {
         release {
             keyAlias 'my-key-alias'
@@ -23,6 +25,7 @@ android {
             storePassword '120577'
         }
     }
+
     buildTypes {
         release {
             signingConfig signingConfigs.release
@@ -33,11 +36,26 @@ android {
                 debugSymbolLevel 'FULL' // Enable native debug symbols
             }
         }
+        debug {
+            // Disable shrinking for debug builds
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8" // Ensure compatibility with JVM target 1.8
+        jvmTarget = "17" // Ensure compatibility with Java 17
     }
+}
+
+dependencies {
+    implementation 'com.google.android.play:core:1.10.3'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
 }
 
 flutter {
